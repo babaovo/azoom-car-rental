@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AZoom logo">
+  <defs>
+    <linearGradient id="blue" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#4d8dff" />
+      <stop offset="1" stop-color="#17376b" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#blue)" />
+  <path d="M20 47 29.7 17h5.2L45 47h-6.1l-2.2-7H27.8l-2.1 7H20Zm9.4-12.5h5.7l-2.9-10-2.8 10Z" fill="#fff" />
+</svg>

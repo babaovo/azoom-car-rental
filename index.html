@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="AZoom Car Rental front-end assignment website for browsing, booking, returning and inspecting rental cars."
+    />
+    <title>AZoom Car Rental</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <button class="brand" type="button" data-view-target="home" aria-label="AZoom home">
+          <span class="brand-mark" aria-hidden="true">A</span>
+          <span>
+            <strong>AZoom</strong>
+            <small>Car Rental</small>
+          </span>
+        </button>
+
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">
+          <span aria-hidden="true">☰</span>
+          <span class="sr-only">Open navigation</span>
+        </button>
+
+        <nav class="main-nav" id="main-navigation" aria-label="Main navigation">
+          <button class="nav-link active" type="button" data-view-target="home">Home</button>
+          <button class="nav-link" type="button" data-view-target="fleet">Cars</button>
+          <button class="nav-link" type="button" data-view-target="rental">My Rental</button>
+          <button class="nav-link" type="button" data-view-target="staff">Staff Portal</button>
+        </nav>
+
+        <div class="header-actions">
+          <button class="icon-button" id="theme-toggle" type="button" aria-label="Switch colour theme" title="Switch colour theme">
+            <span aria-hidden="true">☾</span>
+          </button>
+          <button class="button button-small" type="button" data-view-target="fleet">Book a car</button>
+          <button class="account-button" id="account-button" type="button" aria-haspopup="dialog" aria-controls="auth-modal">
+            <span class="account-avatar" id="account-avatar" aria-hidden="true">U</span>
+            <span id="account-label">Log in</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="view active" id="home-view" data-view="home">
+        <div class="hero">
+          <div class="container hero-grid">
+            <div class="hero-copy">
+              <p class="eyebrow">Simple rental. Clear journey.</p>
+              <h1>Your next trip starts with the right car.</h1>
+              <p class="hero-intro">
+                Find a reliable car, reserve it online and manage the whole rental journey in one place.
+              </p>
+
+              <form class="search-panel" id="quick-search-form">
+                <div class="field">
+                  <label for="quick-location">Pick-up office</label>
+                  <select id="quick-location" name="location" required>
+                    <option value="City Centre Office">City Centre Office</option>
+                    <option value="Airport Office">Airport Office</option>
+                    <option value="North Point Office">North Point Office</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="quick-pickup">Pick-up date</label>
+                  <input id="quick-pickup" name="pickupDate" type="date" required />
+                </div>
+                <div class="field">
+                  <label for="quick-return">Return date</label>
+                  <input id="quick-return" name="returnDate" type="date" required />
+                </div>
+                <button class="button search-button" type="submit">Find cars <span aria-hidden="true">→</span></button>
+              </form>
+
+              <div class="trust-row" aria-label="Service benefits">
+                <span>✓ No hidden charges</span>
+                <span>✓ 24/7 roadside help</span>
+                <span>✓ Easy returns</span>
+              </div>
+            </div>
+
+            <div class="hero-visual">
+              <div class="hero-badge hero-badge-price">
+                <small>From</small>
+                <strong>$58/day</strong>
+              </div>
+              <div class="hero-badge hero-badge-rating">
+                <strong>4.8 ★</strong>
+                <small>Customer rating</small>
+              </div>
+              <div class="sun-disc" aria-hidden="true"></div>
+              <img
+                class="hero-car-photo"
+                src="assets/cars/hero-rental-car.jpg"
+                alt="Blue rental car parked outside a modern pickup office"
+                width="1600"
+                height="800"
+                decoding="async"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="container home-section">
+          <div class="section-heading split-heading">
+            <div>
+              <p class="eyebrow">Popular choices</p>
+              <h2>Cars for every kind of day</h2>
+              <p>Clear daily prices and no surprise fees at checkout.</p>
+            </div>
+            <button class="text-button" type="button" data-view-target="fleet">View all cars <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="car-grid compact" id="featured-cars"></div>
+        </div>
+
+        <div class="how-it-works">
+          <div class="container">
+            <div class="section-heading centered">
+              <p class="eyebrow">How it works</p>
+              <h2>From search to road in three steps</h2>
+            </div>
+            <div class="steps-grid">
+              <article class="step-card">
+                <span class="step-number">01</span>
+                <div class="step-icon" aria-hidden="true">⌕</div>
+                <h3>Choose your car</h3>
+                <p>Compare available cars by type, features and daily price.</p>
+              </article>
+              <article class="step-card">
+                <span class="step-number">02</span>
+                <div class="step-icon" aria-hidden="true">▣</div>
+                <h3>Reserve online</h3>
+                <p>Enter your details and validate the booking with demo card information.</p>
+              </article>
+              <article class="step-card">
+                <span class="step-number">03</span>
+                <div class="step-icon" aria-hidden="true">⌁</div>
+                <h3>Collect and drive</h3>
+                <p>Pick up the vehicle from the selected AZoom office.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="fleet-view" data-view="fleet" hidden>
+        <div class="page-banner">
+          <div class="container">
+            <p class="eyebrow">Our fleet</p>
+            <h1>Find the car that fits your trip</h1>
+            <p>All prices are shown per day. Select a car to begin your reservation.</p>
+          </div>
+        </div>
+        <div class="container page-content">
+          <div class="filter-bar" aria-label="Car filters">
+            <div class="field search-field">
+              <label for="car-search">Search cars</label>
+              <input id="car-search" type="search" placeholder="e.g. Toyota or SUV" />
+            </div>
+            <div class="field">
+              <label for="category-filter">Car type</label>
+              <select id="category-filter">
+                <option value="all">All types</option>
+                <option value="Compact">Compact</option>
+                <option value="Sedan">Sedan</option>
+                <option value="SUV">SUV</option>
+                <option value="Electric">Electric</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="price-sort">Sort by</label>
+              <select id="price-sort">
+                <option value="recommended">Recommended</option>
+                <option value="low">Price: low to high</option>
+                <option value="high">Price: high to low</option>
+              </select>
+            </div>
+          </div>
+          <p class="result-count" id="result-count" aria-live="polite"></p>
+          <div class="car-grid" id="fleet-cars"></div>
+        </div>
+      </section>
+
+      <section class="view" id="booking-view" data-view="booking" hidden>
+        <div class="page-banner compact-banner">
+          <div class="container">
+            <button class="back-button" type="button" data-view-target="fleet"><span aria-hidden="true">←</span> Back to cars</button>
+            <p class="eyebrow">Secure your car</p>
+            <h1>Complete your reservation</h1>
+          </div>
+        </div>
+        <div class="container booking-layout page-content">
+          <div>
+            <ol class="booking-steps" aria-label="Booking progress">
+              <li class="active" data-booking-step="1"><span>1</span> Trip</li>
+              <li data-booking-step="2"><span>2</span> Driver</li>
+              <li data-booking-step="3"><span>3</span> Payment</li>
+            </ol>
+
+            <form id="booking-form" novalidate>
+              <div class="form-step active" data-form-step="1">
+                <div class="form-card">
+                  <div class="form-card-heading">
+                    <div>
+                      <p class="eyebrow">Step 1 of 3</p>
+                      <h2>Trip details</h2>
+                    </div>
+                    <span class="form-icon" aria-hidden="true">⌖</span>
+                  </div>
+                  <div class="form-grid two-columns">
+                    <div class="field">
+                      <label for="pickup-office">Pick-up office</label>
+                      <select id="pickup-office" name="pickupOffice" required>
+                        <option value="City Centre Office">City Centre Office</option>
+                        <option value="Airport Office">Airport Office</option>
+                        <option value="North Point Office">North Point Office</option>
+                      </select>
+                    </div>
+                    <div class="field">
+                      <label for="return-park">Designated return car park</label>
+                      <select id="return-park" name="returnPark" required>
+                        <option value="Marina Car Park A">Marina Car Park A</option>
+                        <option value="Airport Car Park B2">Airport Car Park B2</option>
+                        <option value="North Point Car Park C">North Point Car Park C</option>
+                      </select>
+                    </div>
+                    <div class="field">
+                      <label for="pickup-date">Pick-up date</label>
+                      <input id="pickup-date" name="pickupDate" type="date" required />
+                    </div>
+                    <div class="field">
+                      <label for="return-date">Return date</label>
+                      <input id="return-date" name="returnDate" type="date" required />
+                    </div>
+                  </div>
+                  <fieldset class="extras-fieldset">
+                    <legend>Optional extras</legend>
+                    <label class="check-card">
+                      <input type="checkbox" name="extras" value="gps" />
+                      <span><strong>GPS navigation</strong><small>$6 per day</small></span>
+                    </label>
+                    <label class="check-card">
+                      <input type="checkbox" name="extras" value="childSeat" />
+                      <span><strong>Child seat</strong><small>$5 per day</small></span>
+                    </label>
+                    <label class="check-card">
+                      <input type="checkbox" name="extras" value="additionalDriver" />
+                      <span><strong>Additional driver</strong><small>$10 per day</small></span>
+                    </label>
+                  </fieldset>
+                </div>
+                <div class="form-actions end">
+                  <button class="button" type="button" data-next-step="2">Continue to driver details</button>
+                </div>
+              </div>
+
+              <div class="form-step" data-form-step="2" hidden>
+                <div class="form-card">
+                  <div class="form-card-heading">
+                    <div>
+                      <p class="eyebrow">Step 2 of 3</p>
+                      <h2>Driver details</h2>
+                    </div>
+                    <span class="form-icon" aria-hidden="true">♙</span>
+                  </div>
+                  <div class="form-grid two-columns">
+                    <div class="field full-width">
+                      <label for="customer-name">Full name</label>
+                      <input id="customer-name" name="customerName" type="text" autocomplete="name" placeholder="Alex Tan" required minlength="2" />
+                    </div>
+                    <div class="field">
+                      <label for="customer-email">Email address</label>
+                      <input id="customer-email" name="email" type="email" autocomplete="email" placeholder="alex@example.com" required />
+                    </div>
+                    <div class="field">
+                      <label for="customer-phone">Phone number</label>
+                      <input id="customer-phone" name="phone" type="tel" autocomplete="tel" placeholder="8123 4567" required pattern="[0-9 +()-]{8,16}" />
+                    </div>
+                    <div class="field full-width">
+                      <label for="licence-number">Driving licence number</label>
+                      <input id="licence-number" name="licenceNumber" type="text" placeholder="S1234567A" required minlength="6" maxlength="20" />
+                    </div>
+                  </div>
+                  <label class="agreement-row">
+                    <input type="checkbox" name="ageConfirmed" required />
+                    <span>I confirm that the driver is at least 21 years old and has a valid driving licence.</span>
+                  </label>
+                </div>
+                <div class="form-actions">
+                  <button class="button button-secondary" type="button" data-prev-step="1">Back</button>
+                  <button class="button" type="button" data-next-step="3">Continue to payment</button>
+                </div>
+              </div>
+
+              <div class="form-step" data-form-step="3" hidden>
+                <div class="form-card">
+                  <div class="form-card-heading">
+                    <div>
+                      <p class="eyebrow">Step 3 of 3</p>
+                      <h2>Demo card details</h2>
+                    </div>
+                    <span class="form-icon" aria-hidden="true">▤</span>
+                  </div>
+                  <div class="demo-notice">
+                    <strong>Simulated payment only</strong>
+                    <span>The form checks the card format only. No real payment is processed and full card details are never stored.</span>
+                  </div>
+                  <div class="form-grid two-columns payment-fields">
+                    <div class="field full-width">
+                      <label for="card-name">Name on card</label>
+                      <input id="card-name" name="cardName" type="text" autocomplete="cc-name" placeholder="ALEX TAN" required />
+                    </div>
+                    <div class="field full-width">
+                      <label for="card-number">Card number</label>
+                      <input id="card-number" name="cardNumber" type="text" inputmode="numeric" autocomplete="cc-number" placeholder="4242 4242 4242 4242" maxlength="19" required />
+                      <small class="field-hint">For testing, use 4242 4242 4242 4242.</small>
+                    </div>
+                    <div class="field">
+                      <label for="card-expiry">Expiry date</label>
+                      <input id="card-expiry" name="cardExpiry" type="text" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY" maxlength="5" required />
+                    </div>
+                    <div class="field">
+                      <label for="card-cvv">CVV</label>
+                      <input id="card-cvv" name="cardCvv" type="password" inputmode="numeric" autocomplete="cc-csc" placeholder="123" maxlength="3" required />
+                    </div>
+                  </div>
+                  <label class="agreement-row">
+                    <input type="checkbox" name="termsAccepted" required />
+                    <span>I agree to the rental terms and understand that extra damage charges may apply after inspection.</span>
+                  </label>
+                </div>
+                <div class="form-actions">
+                  <button class="button button-secondary" type="button" data-prev-step="2">Back</button>
+                  <button class="button" id="confirm-booking-button" type="submit">Confirm reservation</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <aside class="booking-summary" id="booking-summary" aria-label="Booking summary"></aside>
+        </div>
+      </section>
+
+      <section class="view" id="rental-view" data-view="rental" hidden>
+        <div class="page-banner">
+          <div class="container">
+            <p class="eyebrow">Customer dashboard</p>
+            <h1>My rental journey</h1>
+            <p>Follow each stage from reservation to final payment.</p>
+          </div>
+        </div>
+        <div class="container page-content" id="rental-dashboard"></div>
+      </section>
+
+      <section class="view" id="staff-view" data-view="staff" hidden>
+        <div class="page-banner staff-banner">
+          <div class="container banner-row">
+            <div>
+              <p class="eyebrow">AZoom team</p>
+              <h1>Vehicle return inspection</h1>
+              <p>Review returned vehicles and prepare the customer's final bill.</p>
+            </div>
+            <span class="staff-pill">Employee demo</span>
+          </div>
+        </div>
+        <div class="container page-content" id="staff-dashboard"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <div class="footer-brand"><span class="brand-mark" aria-hidden="true">A</span><strong>AZoom Car Rental</strong></div>
+          <p>A front-end university project demonstrating a complete car rental journey.</p>
+        </div>
+        <div>
+          <h2>Quick links</h2>
+          <button type="button" data-view-target="fleet">Browse cars</button>
+          <button type="button" data-view-target="rental">My rental</button>
+          <button type="button" data-view-target="staff">Staff portal</button>
+        </div>
+        <div>
+          <h2>Rental support</h2>
+          <p>+65 6123 4567</p>
+          <p>support@azoom.example</p>
+          <p>Open daily, 8:00–20:00</p>
+        </div>
+        <div>
+          <h2>Demo controls</h2>
+          <button class="footer-reset" id="reset-demo" type="button">Reset demo data</button>
+          <p class="footer-note">Demo accounts and payments are stored only in this browser.</p>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>© 2026 AZoom Car Rental</span>
+        <span>Built with HTML, CSS and JavaScript</span>
+      </div>
+    </footer>
+
+    <div class="auth-modal" id="auth-modal" hidden>
+      <button class="auth-backdrop" type="button" tabindex="-1" data-auth-close aria-label="Close account window"></button>
+      <section class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title" tabindex="-1">
+        <button class="auth-close" type="button" data-auth-close aria-label="Close account window">×</button>
+
+        <div id="auth-guest-view">
+          <p class="eyebrow">Customer account</p>
+          <h2 id="auth-modal-title">Welcome to AZoom</h2>
+          <p class="auth-intro">Create an account or log in to keep your customer details ready for your next booking.</p>
+
+          <div class="auth-tabs" role="tablist" aria-label="Account options">
+            <button class="auth-tab active" id="login-tab" type="button" role="tab" aria-selected="true" aria-controls="login-panel" data-auth-panel-target="login">Log in</button>
+            <button class="auth-tab" id="register-tab" type="button" role="tab" aria-selected="false" aria-controls="register-panel" data-auth-panel-target="register">Register</button>
+          </div>
+
+          <div class="auth-panel" id="login-panel" role="tabpanel" aria-labelledby="login-tab" data-auth-panel="login">
+            <form id="login-form">
+              <div class="field">
+                <label for="login-email">Email address</label>
+                <input id="login-email" name="email" type="email" autocomplete="email" placeholder="alex@example.com" aria-describedby="login-message" required />
+              </div>
+              <div class="field">
+                <label for="login-password">Password</label>
+                <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" aria-describedby="login-message" required />
+              </div>
+              <p class="auth-message" id="login-message" aria-live="polite"></p>
+              <button class="button auth-submit" type="submit">Log in</button>
+            </form>
+          </div>
+
+          <div class="auth-panel" id="register-panel" role="tabpanel" aria-labelledby="register-tab" data-auth-panel="register" hidden>
+            <form id="register-form">
+              <div class="field">
+                <label for="register-name">Full name</label>
+                <input id="register-name" name="name" type="text" autocomplete="name" placeholder="Alex Tan" minlength="2" aria-describedby="register-message" required />
+              </div>
+              <div class="field">
+                <label for="register-email">Email address</label>
+                <input id="register-email" name="email" type="email" autocomplete="email" placeholder="alex@example.com" aria-describedby="register-message" required />
+              </div>
+              <div class="field">
+                <label for="register-password">Password</label>
+                <input id="register-password" name="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" minlength="8" aria-describedby="register-message" required />
+                <small>Use at least 8 characters with a letter and a number.</small>
+              </div>
+              <div class="field">
+                <label for="register-confirm-password">Confirm password</label>
+                <input id="register-confirm-password" name="confirmPassword" type="password" autocomplete="new-password" placeholder="Enter the password again" minlength="8" aria-describedby="register-message" required />
+              </div>
+              <p class="auth-message" id="register-message" aria-live="polite"></p>
+              <button class="button auth-submit" type="submit">Create account</button>
+            </form>
+          </div>
+
+          <p class="auth-security-note"><strong>Classroom demo:</strong> account data is stored only in this browser. Do not use a real password.</p>
+        </div>
+
+        <div id="auth-account-view" hidden>
+          <p class="eyebrow">Signed in</p>
+          <h2 id="account-heading">Your AZoom account</h2>
+          <div class="account-profile-card">
+            <span class="account-profile-avatar" id="account-profile-avatar" aria-hidden="true">A</span>
+            <div>
+              <strong id="account-name"></strong>
+              <span id="account-email"></span>
+            </div>
+          </div>
+          <p class="account-created" id="account-created"></p>
+          <p class="auth-security-note">Your login remains active after a page refresh on this browser.</p>
+          <div class="auth-account-actions">
+            <button class="button button-secondary" id="logout-button" type="button">Log out</button>
+            <button class="button" type="button" data-auth-close>Continue browsing</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+    <template id="car-card-template">
+      <article class="car-card">
+        <div class="car-card-art">
+          <span class="car-status"></span>
+          <img class="car-photo" alt="" width="1200" height="800" loading="lazy" decoding="async" />
+        </div>
+        <div class="car-card-body">
+          <div class="car-card-title-row">
+            <div><p class="car-category"></p><h3 class="car-name"></h3></div>
+            <div class="car-price"><strong></strong><span>/ day</span></div>
+          </div>
+          <ul class="car-features" aria-label="Car features"></ul>
+          <button class="button car-book-button" type="button">Select this car</button>
+        </div>
+      </article>
+    </template>
+  </body>
+</html>
